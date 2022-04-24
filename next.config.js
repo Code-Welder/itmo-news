@@ -3,4 +3,7 @@ module.exports = {
     locales: ['en', 'ru'],
     defaultLocale: 'ru',
   },
+  images: {
+    domains: ['news.itmo.ru'],
+  },
 }
