@@ -1,0 +1,65 @@
+@import './variables';
+
+.wrapper {
+  width: 90px;
+  position: relative;
+
+  &.open {
+    .nav {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toggleBtn {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.toggleBtn {
+  height: 40px;
+  color: $--color-white;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 6px;
+    background: url('../public/img/icons/arr-down.svg');
+    transition: transform .1s linear;
+  }
+}
+
+.toggleBtn,
+.btn {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 12px;
+
+  .icon {
+    margin-right: 6px;
+  }
+}
+
+.nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 0 10px 0 rgba($--color-black, .2);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s, visibility .2s;
+}
+
+.btn {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  background-color: $--color-white;
+  color: $--color-black;
+}
