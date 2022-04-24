@@ -1,23 +1,15 @@
 @import './variables';
+@import './fonts';
+@import './reset';
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
   color: $--color-black;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  font-family: $--font-primary;
+  font-weight: 600;
 }
 
 .container {
@@ -27,6 +19,20 @@ ul {
 }
 
 header {  
-  padding: 12px 0;
   background: linear-gradient(to right, #3951E7, #832AB9);
+}
+
+.header {
+  &-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &-lang {  
+    margin-left: auto;
+  }
+}
+
+.h3 {
+  font: 700 40px/1 $--font-secondary;
 }
