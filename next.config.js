@@ -6,4 +6,12 @@ module.exports = {
   images: {
     domains: ['news.itmo.ru'],
   },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+
+    return config;
+  }
 }
