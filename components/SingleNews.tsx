@@ -21,6 +21,7 @@ const SingleNews = () => {
         setIsContentAvalible(false)
       }
     }     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newsList])
 
   if (!isContentAvalible && !isLoading) {

@@ -25,6 +25,7 @@ const NewsList = () => {
       // prefetch another locale
       prefetchNews(locale === 'ru' ? 'en' : 'ru')
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
   return (
