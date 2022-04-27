@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useState } from "react";
-import { getNewsList } from 'lib/api';
 import NewsCard from 'components/NewsCard';
 import NewsCardSkeleton from 'components/NewsCardSkeleton';
+import { useFetchNewsQuery, usePrefetch } from 'services/NewsService';
 
 const localesOptions = {
   ru: {
@@ -18,29 +17,29 @@ const fakeNewsList = new Array(9).fill(null)
 
 const NewsList = () => {
   const { locale } = useRouter()
-  const [newsList, setNewsList] = useState([])
-  const [isLoading, setIsLoading] = useState(null)  
+  const prefetchNews = usePrefetch('fetchNews')
+  const {data: newsList, isLoading} = useFetchNewsQuery(locale === 'ru' ? 'ru' : 'en')
 
   useEffect(() => {
-    setIsLoading(true)
-    getNewsList(locale == 'ru' ? 'ru' : 'en')
-      .then(d => {
-        setNewsList(d.news)
-        setIsLoading(false)
-      })
-  }, [locale])
+    if (!isLoading) {
+      // prefetch another locale
+      prefetchNews(locale === 'ru' ? 'en' : 'ru')
+    }
+  }, [isLoading])
 
   return (
     <div className='wrapper'>
-      <h2 className='title'>{localesOptions[locale]['title']}</h2>
+      <h2 className='title'>{localesOptions[locale]['title']}</h2>  
       <ul className='list'>
-        {
-          isLoading 
-          ? fakeNewsList.map((news, i) => {
+        { 
+          isLoading &&
+          fakeNewsList.map((_, i) => {              
             return <NewsCardSkeleton key={i} />
-          }) 
-
-          : newsList.map(news => {
+          })
+        }
+        {
+          newsList &&
+          newsList.map(news => {
             return <NewsCard key={news.id} id={news.id} imgSrc={news.image_small} title={news.title} date={news.date} />
           })
         }
